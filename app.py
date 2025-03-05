@@ -1,5 +1,5 @@
-from flask import Flask, jsonify#, request, jsonify
-# from nlp import fitted_text_clf
+from flask import Flask, request, jsonify
+from nlp import fitted_text_clf
 
 app = Flask(__name__)
 
@@ -8,20 +8,23 @@ def hello_world():
     return jsonify({"Message": "Hello world!"})
 
 
-# @app.route("/sentiment", methods=["POST"])
-# def get_sentiment():
-#     try:
-#         input_data = request.json
-#         text = input_data.get("text")
+@app.route("/sentiment", methods=["POST"])
+def get_sentiment():
+    try:
+        input_data = request.json
+        text = input_data.get("text")
         
-#         if not text:
-#             return jsonify({"error": "Invalid request body"}), 400
+        if not text:
+            return jsonify({"error": "Invalid request body"}), 400
         
-#         result = fitted_text_clf.predict([text])[0]
+        if fitted_text_clf is None:
+            return jsonify({"error": "fitted_text_clf is None"})
 
-#         return jsonify({"result": result})
-#     except Exception as e:
-#         return jsonify({"error": str(e)}), 500
+        result = fitted_text_clf.predict([text])[0]
+
+        return jsonify({"result": result})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 if __name__ == '__main__':
