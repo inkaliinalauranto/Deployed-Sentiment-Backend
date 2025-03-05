@@ -1,11 +1,11 @@
-from flask import Flask#, request, jsonify
+from flask import Flask, jsonify#, request, jsonify
 # from nlp import fitted_text_clf
 
 app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
-    return "<h1>Hello World!</h1>"
+    return jsonify({"Message": "Hello world!"})
 
 
 # @app.route("/sentiment", methods=["POST"])
