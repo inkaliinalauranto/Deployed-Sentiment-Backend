@@ -1,6 +1,7 @@
 import pickle
+from sklearn.pipeline import Pipeline
 
-fitted_text_clf = None
+fitted_text_clf: Pipeline = None
 
 # Avataan serialisoidun koulutetun analyysimallin sisällään pitämä tiedosto:
 with open("./data/fitted_text_clf.pkl", "rb") as f:
