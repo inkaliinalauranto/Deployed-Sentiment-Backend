@@ -17,12 +17,10 @@ def get_sentiment():
         if not text:
             return jsonify({"error": "Invalid request body"}), 400
         
-        if fitted_text_clf is None:
-            return jsonify({"error": "fitted_text_clf is None"})
-
-        result = "neutral"
+        result = fitted_text_clf.predict([text])[0]
 
         return jsonify({"result": result})
+    
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
