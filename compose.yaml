@@ -1,0 +1,8 @@
+services:
+  web:
+    build: .
+    restart: "no"
+    ports:
+      - "8080:8080"
+    environment:
+      - FLASK_DEBUG=1
