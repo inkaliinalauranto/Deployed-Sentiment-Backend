@@ -18,7 +18,7 @@ def get_sentiment():
         
         result = fitted_text_clf.predict([text])[0]
 
-        return jsonify({"result": result})
+        return jsonify({"result": result}).headers.add("Access-Control-Allow-Origin", "*")
     
     except Exception as e:
         return jsonify({"error": str(e)}), 500
