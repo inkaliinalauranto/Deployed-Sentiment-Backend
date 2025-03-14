@@ -5,6 +5,9 @@ from nlp import fitted_text_clf
 def hello_world():
     return jsonify({"Message": "Hello world!"})
 
+def get_fake_sentiment():
+    return jsonify({"result": "positive"})
+
 def get_sentiment():
     try:
         input_data = request.json
