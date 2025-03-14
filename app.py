@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # Sallitaan frontendin locahostin origin ja Renderissä käyttöönotettuun 
 # versioon liittyvä origin:
-CORS(app, origins=["http://localhost:5173", "https://deployed-sentiment-analysis-frontend.onrender.com/"])
+CORS(app)
 
 app.add_url_rule(rule="/", view_func=hello_world)
 
