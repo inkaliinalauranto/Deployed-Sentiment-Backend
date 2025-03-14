@@ -10,7 +10,7 @@ CORS(app)
 
 app.add_url_rule(rule="/", view_func=hello_world)
 
-app.add_url_rule(rule="/api/sentiment",
+app.add_url_rule(rule="/sentiment",
                  view_func=get_sentiment,
                  methods=["POST"])
 
