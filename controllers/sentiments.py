@@ -5,9 +5,6 @@ from nlp import fitted_text_clf
 def hello_world():
     return jsonify({"Message": "Hello world!"})
 
-def get_fake_sentiment():
-    return jsonify({"result": "positive"})
-
 def get_sentiment():
     try:
         input_data = request.json
@@ -18,7 +15,7 @@ def get_sentiment():
         
         result = fitted_text_clf.predict([text])[0]
 
-        return jsonify({"result": result}).headers.add("Access-Control-Allow-Origin", "*")
+        return jsonify({"result": result})
     
     except Exception as e:
         return jsonify({"error": str(e)}), 500

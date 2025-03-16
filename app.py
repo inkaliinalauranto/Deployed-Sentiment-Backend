@@ -4,7 +4,7 @@ from controllers.sentiments import get_sentiment, hello_world
 
 app = Flask(__name__)
 
-CORS(app)
+CORS(app, origins=["http://localhost:5173/"])
 
 app.add_url_rule(rule="/", view_func=hello_world)
 
