@@ -3,7 +3,7 @@ from nlp import fitted_text_clf
 
 
 def hello_world():
-    return jsonify({"Message": "Hello world! Muokattu"})
+    return jsonify({"Message": "Hello world! Muokattu2"})
 
 def get_sentiment():
     try:
