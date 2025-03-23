@@ -7,7 +7,9 @@ https://sentiment-backend-private-git-deployed-sentiment-analysis.2.rahtiapp.fi/
 
 Pyyntöön on liitettävä JSON-muotoinen body, jossa on avain *"text"* valitulla arvolla.
 
-Backendia käyttää esimerkiksi tälle backendille tehty frontend, joka on otettu käyttöön sekä [Renderissä](https://deployed-sentiment-analysis-frontend.onrender.com/) että [Azuressa](https://kind-forest-04e83171e.6.azurestaticapps.net/).
+Asetettujen CORS-käytänteiden vuoksi POST-API-funktiota voi käyttää ainoastaan paikallisesti osoitteesta http://localhost:5500.
+
+Backendia käyttää lisäksi tälle backendille tehty frontend, joka on otettu käyttöön sekä [Renderissä](https://deployed-sentiment-analysis-frontend.onrender.com/) että [Azuressa](https://kind-forest-04e83171e.6.azurestaticapps.net/).
 
 ## Esimerkit
 
