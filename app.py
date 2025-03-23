@@ -9,7 +9,7 @@ CORS(
     origins=[
         "http://localhost:5500",
         "https://kind-forest-04e83171e.6.azurestaticapps.net:8080",
-        "https://deployed-sentiment-analysis-frontend.onrender.com:8080",
+        "https://deployed-sentiment-analysis-frontend.onrender.com:10000",
     ],
     supports_credentials=True,
 )
