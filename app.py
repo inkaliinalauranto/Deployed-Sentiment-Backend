@@ -1,9 +1,21 @@
+from dotenv import load_dotenv
 from flask import Flask
 from flask_cors import CORS
 from controllers.sentiments import get_sentiment, hello_world
+from controllers.users import get_users, register, login, get_account
+from models import Base
+from init_db import engine
 
+# Ladataan ympäristömuuttujat:
+load_dotenv()
+
+# Luodaan tietokantataulut, jos niitä ei vielä ole:
+Base.metadata.create_all(bind=engine)
+
+# Alustetaan Flask-luokan instanssi:
 app = Flask(__name__)
 
+# Määritellään, miltä verkkotunnuksilta backendin API-resursseihin on pääsy:
 CORS(
     app,
     origins=[
@@ -14,8 +26,13 @@ CORS(
 )
 
 app.add_url_rule(rule="/", view_func=hello_world)
-
 app.add_url_rule(rule="/api/sentiment", view_func=get_sentiment, methods=["POST"])
+
+app.add_url_rule(rule="/api/users", view_func=get_users)
+
+app.add_url_rule(rule="/api/register", view_func=register, methods=["POST"])
+app.add_url_rule(rule="/api/login", view_func=login, methods=["POST"])
+app.add_url_rule(rule="/api/account", view_func=get_account)
 
 # if __name__ == '__main__':
 #     app.run(host="0.0.0.0", port="8080", debug=False)
