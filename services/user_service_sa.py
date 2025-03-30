@@ -27,7 +27,7 @@ class UserServiceSa(UserServiceBase):
 
         return user
 
-    def create(self, req: UserReqDto) -> User:
+    def create(self, req: UserReqDto) -> Type[User]:
         try:
             existing_username: User | None = (self.conn.query(User)
                                               .filter(func.lower(User.username) == req.username.lower())

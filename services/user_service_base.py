@@ -16,7 +16,7 @@ class UserServiceBase(abc.ABC):
         raise NotImplementedError()
 
     @abc.abstractmethod
-    def create(self, req: UserReqDto) -> User:
+    def create(self, req: UserReqDto) -> Type[User]:
         raise NotImplementedError()
 
     @abc.abstractmethod
