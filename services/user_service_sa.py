@@ -20,14 +20,14 @@ class UserServiceSa(UserServiceBase):
         return users
 
     def get_by_id(self, user_id: int) -> Type[User]:
-        user = self.conn.query(User).filter(User.id == user_id).first()
+        user: Type[User] = self.conn.query(User).filter(User.id == user_id).first()
 
         if user is None:
             raise Exception("User not found")
 
         return user
 
-    def create(self, req: UserReqDto) -> Type[User]:
+    def create(self, req: UserReqDto) -> User:
         try:
             existing_username: User | None = (self.conn.query(User)
                                               .filter(func.lower(User.username) == req.username.lower())
