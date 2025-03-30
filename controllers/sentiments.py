@@ -1,5 +1,6 @@
 from flask import jsonify, request
 from nlp import fitted_text_clf
+from tools.require_user import require_user
 
 
 def hello_world():
@@ -8,6 +9,8 @@ def hello_world():
 
 def get_sentiment():
     try:
+        require_user(request)
+
         input_data = request.json
         text = input_data.get("text")
 

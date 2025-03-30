@@ -5,7 +5,7 @@ import bcrypt
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
-from dtos.auth import UserReqDto
+from dtos.users import UserReqDto
 from models import User
 from services.user_service_base import UserServiceBase
 from tools.token_methods_base import TokenMethodsBase
@@ -20,7 +20,7 @@ class UserServiceSa(UserServiceBase):
         return users
 
     def get_by_id(self, user_id: int) -> Type[User]:
-        user = self.conn.query(User).filter(User.id == user_id).first()
+        user: Type[User] = self.conn.query(User).filter(User.id == user_id).first()
 
         if user is None:
             raise Exception("User not found")
@@ -64,7 +64,7 @@ class UserServiceSa(UserServiceBase):
                 return token.create_token({"sub": str(user.id),
                                            "username": user.username,
                                            "iat": datetime.now().timestamp(),
-                                           "exp": datetime.now().timestamp() + (3600 * 24 * 30)})
+                                           "exp": datetime.now().timestamp() + (3600 * 24 * 7)})
 
             raise Exception("Error with login")
         except Exception as e:

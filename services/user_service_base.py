@@ -1,7 +1,7 @@
 import abc
 from typing import Type
 
-from dtos.auth import UserReqDto
+from dtos.users import UserReqDto
 from models import User
 from tools.token_methods_base import TokenMethodsBase
 
