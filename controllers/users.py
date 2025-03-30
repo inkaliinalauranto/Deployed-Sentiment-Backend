@@ -9,18 +9,29 @@ from dtos.users import UserResDto, UserReqDto
 from models import User
 from services.user_service_base import UserServiceBase
 from tools.token_methods_base import TokenMethodsBase
-from tools.token_methods_sa import TokenMethodsSa
+
+USER_SERVICE = "user"
+NO_SERVICE = "no"
 
 
 @get_db_conn
-@init_service("user")
-def get_users(service: UserServiceBase):
-    users: list[Type[User]] = service.get_all()
-    return jsonify([(UserResDto.model_validate(user)).dict() for user in users])
+@init_service(USER_SERVICE)
+def get_user(service: UserServiceBase, user_id):
+    user = service.get_by_id(user_id)
+    return jsonify((UserResDto.model_validate(user)).dict())
+
+
+@require_user(USER_SERVICE)
+def get_users(user: User, service: UserServiceBase):
+    try:
+        users: list[Type[User]] = service.get_all()
+        return jsonify([(UserResDto.model_validate(user)).dict() for user in users])
+    except Exception as e:
+        return jsonify({"Error": str(e)})
 
 
 @get_db_conn
-@init_service("user")
+@init_service(USER_SERVICE)
 def register(service: UserServiceBase):
     try:
         if not request.json.get("username") or not request.json.get("password"):
@@ -37,7 +48,7 @@ def register(service: UserServiceBase):
 
 
 @get_db_conn
-@init_service("user")
+@init_service(USER_SERVICE)
 @init_token_methods
 def login(service: UserServiceBase, token_methods: TokenMethodsBase):
     try:
@@ -56,7 +67,7 @@ def login(service: UserServiceBase, token_methods: TokenMethodsBase):
         return jsonify({"Error": str(e)}), 500
 
 
-@require_user
+@require_user(NO_SERVICE)
 def get_account(user: User):
     try:
         return jsonify((UserResDto.model_validate(user)).dict())

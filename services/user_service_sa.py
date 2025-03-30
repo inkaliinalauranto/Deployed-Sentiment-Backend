@@ -64,7 +64,7 @@ class UserServiceSa(UserServiceBase):
                 return token.create_token({"sub": str(user.id),
                                            "username": user.username,
                                            "iat": datetime.now().timestamp(),
-                                           "exp": datetime.now().timestamp() + (3600 * 24 * 30)})
+                                           "exp": datetime.now().timestamp() + (3600 * 24 * 7)})
 
             raise Exception("Error with login")
         except Exception as e:
