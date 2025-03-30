@@ -15,13 +15,6 @@ USER_SERVICE = "user"
 
 @get_db_conn
 @init_service(USER_SERVICE)
-def get_user(service: UserServiceBase, user_id):
-    user = service.get_by_id(user_id)
-    return jsonify((UserResDto.model_validate(user)).dict())
-
-
-@get_db_conn
-@init_service(USER_SERVICE)
 def get_users(service: UserServiceBase):
     try:
         require_user(request)

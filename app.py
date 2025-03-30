@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 from flask import Flask
 from flask_cors import CORS
 from controllers.sentiments import get_sentiment, hello_world
-from controllers.users import get_users, register, login, get_account, get_user
+from controllers.users import get_users, register, login, get_account
 from models import Base
 from init_db import engine
 
@@ -29,7 +29,6 @@ app.add_url_rule(rule="/", view_func=hello_world)
 app.add_url_rule(rule="/api/sentiment", view_func=get_sentiment, methods=["POST"])
 
 app.add_url_rule(rule="/api/users", view_func=get_users)
-app.add_url_rule(rule="/api/users/<user_id>", view_func=get_user)
 
 app.add_url_rule(rule="/api/register", view_func=register, methods=["POST"])
 app.add_url_rule(rule="/api/login", view_func=login, methods=["POST"])
