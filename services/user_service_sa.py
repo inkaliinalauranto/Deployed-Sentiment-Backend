@@ -5,7 +5,7 @@ import bcrypt
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
-from dtos.auth import UserReqDto
+from dtos.users import UserReqDto
 from models import User
 from services.user_service_base import UserServiceBase
 from tools.token_methods_base import TokenMethodsBase
