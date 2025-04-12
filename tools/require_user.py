@@ -9,7 +9,7 @@ from services.user_service_base import UserServiceBase
 from tools.token_methods_sa import TokenMethodsSa
 
 
-def require_user(req: Request, return_user=False) -> Type[User] | None:
+def require_user(req: Request, return_user=False) -> User:
     try:
         token: str | None = req.headers.get("Authorization")
 
@@ -30,7 +30,7 @@ def require_user(req: Request, return_user=False) -> Type[User] | None:
         with init_db_conn() as conn:
             user_service: UserServiceBase = init_user_service(conn)
 
-            user: Type[User] = user_service.get_by_id(int(claims["sub"]))
+            user: User | None = user_service.get_by_id(int(claims["sub"]))
 
             if return_user is True:
                 return user
