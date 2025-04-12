@@ -12,3 +12,7 @@ class UserResDto(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class PasswordReqDto(BaseModel):
+    password: str

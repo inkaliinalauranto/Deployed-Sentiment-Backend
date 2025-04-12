@@ -1,7 +1,7 @@
 import abc
 from typing import Type
 
-from dtos.users import UserReqDto
+from dtos.users import UserReqDto, PasswordReqDto
 from models import User
 from tools.token_methods_base import TokenMethodsBase
 
@@ -12,7 +12,7 @@ class UserServiceBase(abc.ABC):
         raise NotImplementedError()
 
     @abc.abstractmethod
-    def get_by_id(self, user_id: int) -> Type[User]:
+    def get_by_id(self, user_id: int) -> User:
         raise NotImplementedError()
 
     @abc.abstractmethod
@@ -21,4 +21,12 @@ class UserServiceBase(abc.ABC):
 
     @abc.abstractmethod
     def login(self, req: UserReqDto, token: TokenMethodsBase) -> str:
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    def change_password(self, req: PasswordReqDto, user_id: int) -> User:
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    def delete(self, user: User) -> None:
         raise NotImplementedError()
