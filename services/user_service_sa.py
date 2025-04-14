@@ -52,7 +52,7 @@ class UserServiceSa(UserServiceBase):
             self.conn.rollback()
             raise e
 
-    def login(self, req: UserReqDto, token: TokenMethodsBase) -> str:
+    def login(self, req: UserReqDto, token_methods: TokenMethodsBase) -> str:
         try:
             user: User | None = self.conn.query(User).filter(User.username == req.username).first()
 
@@ -60,10 +60,10 @@ class UserServiceSa(UserServiceBase):
                 raise Exception("User not found")
 
             if bcrypt.checkpw(req.password.encode("utf-8"), user.hashed_password):
-                return token.create_token({"sub": str(user.id),
-                                           "username": user.username,
-                                           "iat": datetime.now().timestamp(),
-                                           "exp": datetime.now().timestamp() + (3600 * 24 * 7)})
+                return token_methods.create_token({"sub": str(user.id),
+                                                   "username": user.username,
+                                                   "iat": datetime.now().timestamp(),
+                                                   "exp": datetime.now().timestamp() + (3600 * 24 * 7)})
 
             raise Exception("Error with login")
         except Exception as e:

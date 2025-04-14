@@ -1,15 +1,26 @@
 # Deployed-Sentiment-Backend
 
-Backend sisältää POST-API-funktion, joka palauttaa tunneanalyysituloksen funktiolle välitetyn pyynnön sisältämästä tekstistä.
+Backend sisältää web-ohjelmointirajapintafunktioita, joiden kautta backendin tietokantaan on mahdollista toteuttaa CRUD-operaatioita. 
 
-POST-pyyntö lähetetään seuraavaan resurssiin:
-https://sentiment-backend-private-git-deployed-sentiment-analysis.2.rahtiapp.fi/api/sentiment
+Päätason endpoint on https://sentiment-backend-private-git-deployed-sentiment-analysis.2.rahtiapp.fi.
 
-Pyyntöön on liitettävä JSON-muotoinen body, jossa on avain *"text"* valitulla arvolla.
+API-funktiopyyntö muodostetaan lisäämällä päätason endpointin perään rajapintafunktion oma resurssi-/endpoint-pääte.
 
-Asetettujen CORS-käytänteiden vuoksi POST-API-funktiota voi käyttää ainoastaan paikallisesti osoitteesta http://localhost:5500.
+Rajapintafunktioita käytetään alla olevan taulukon mukaisesti:
 
-Backendia käyttää lisäksi tälle backendille tehty frontend, joka on otettu käyttöön sekä [Renderissä](https://deployed-sentiment-analysis-frontend.onrender.com/) että [Azuressa](https://kind-forest-04e83171e.6.azurestaticapps.net/).
+
+| **Toiminto (CRUD)**                        | **HTTP-metodi** | **Endpointin pääte** | **JSON body**                           | **Token vaaditaan Authorization headeriin** |
+|--------------------------------------------|-----------------|----------------------|-----------------------------------------|---------------------------------------------|
+| Käyttäjän luominen (C)                     | POST            | /api/register        | username- ja password-avaimet arvoineen | Ei                                          |
+| Käyttäjän omien tietojen hakeminen (R)     | GET             | /api/account         | Ei                                      | Kyllä                                       |
+| Käyttäjän oman salasanan päivittäminen (U) | PATCH           | /api/change-password | password-avain arvoineen                | Kyllä                                       |
+| Käyttäjän itsensä poistaminen (D)          | DELETE          | /api/remove          | Ei                                      | Kyllä                                       |
+| Sisäänkirjautuminen                        | POST            | /api/login           | username- ja password-avaimet arvoineen | Ei                                          |
+| Tunneanalyysin toteuttaminen syötteelle    | POST            | /api/sentiment       | text-avain arvoineen                    | Kyllä                                       |
+
+
+
+Rajapintaa hyödyntää sille tehty frontend, joka on otettu käyttöön sekä [Renderissä](https://deployed-sentiment-analysis-frontend.onrender.com/) että [Azuressa](https://kind-forest-04e83171e.6.azurestaticapps.net/).
 
 ## Esimerkit
 

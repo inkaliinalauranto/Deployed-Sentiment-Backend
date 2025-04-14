@@ -20,7 +20,7 @@ class UserServiceBase(abc.ABC):
         raise NotImplementedError()
 
     @abc.abstractmethod
-    def login(self, req: UserReqDto, token: TokenMethodsBase) -> str:
+    def login(self, req: UserReqDto, token_methods: TokenMethodsBase) -> str:
         raise NotImplementedError()
 
     @abc.abstractmethod
