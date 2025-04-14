@@ -9,14 +9,14 @@ API-funktiopyyntö muodostetaan lisäämällä päätason endpointin perään ra
 Rajapintafunktioita käytetään alla olevan taulukon mukaisesti:
 
 
-| **Toiminto (CRUD)**                        | **HTTP-metodi** | **Endpointin pääte** | **JSON body**                           | **Token vaaditaan Authorization headeriin** |
-|--------------------------------------------|-----------------|----------------------|-----------------------------------------|---------------------------------------------|
-| Käyttäjän luominen (C)                     | POST            | /api/register        | username- ja password-avaimet arvoineen | Ei                                          |
-| Käyttäjän omien tietojen hakeminen (R)     | GET             | /api/account         | Ei                                      | Kyllä                                       |
-| Käyttäjän oman salasanan päivittäminen (U) | PATCH           | /api/change-password | password-avain arvoineen                | Kyllä                                       |
-| Käyttäjän itsensä poistaminen (D)          | DELETE          | /api/remove          | Ei                                      | Kyllä                                       |
-| Sisäänkirjautuminen                        | POST            | /api/login           | username- ja password-avaimet arvoineen | Ei                                          |
-| Tunneanalyysin toteuttaminen syötteelle    | POST            | /api/sentiment       | text-avain arvoineen                    | Kyllä                                       |
+| Toiminto (CRUD)                            | HTTP-metodi | Endpointin pääte     | JSON body                               | Token vaaditaan Authorization headeriin  |
+|:-------------------------------------------|:------------|:---------------------|:----------------------------------------|:-----------------------------------------|
+| Käyttäjän luominen (C)                     | POST        | /api/register        | username- ja password-avaimet arvoineen | Ei                                       |
+| Käyttäjän omien tietojen hakeminen (R)     | GET         | /api/account         | Ei                                      | Kyllä                                    |
+| Käyttäjän oman salasanan päivittäminen (U) | PATCH       | /api/change-password | password-avain arvoineen                | Kyllä                                    |
+| Käyttäjän itsensä poistaminen (D)          | DELETE      | /api/remove          | Ei                                      | Kyllä                                    |
+| Sisäänkirjautuminen                        | POST        | /api/login           | username- ja password-avaimet arvoineen | Ei                                       |
+| Tunneanalyysin toteuttaminen syötteelle    | POST        | /api/sentiment       | text-avain arvoineen                    | Kyllä                                    |
 
 
 
