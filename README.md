@@ -4,9 +4,9 @@ Backend sisältää web-ohjelmointirajapintafunktioita, joiden kautta backendin 
 
 Päätason endpoint on https://sentiment-backend-private-git-deployed-sentiment-analysis.2.rahtiapp.fi.
 
-API-funktiopyyntö muodostetaan lisäämällä päätason endpointin perään rajapintafunktion oma resurssi-/endpoint-pääte.
+Web-API-pyynnön URL muodostetaan lisäämällä päätason endpointin perään pyynnön resurssi-/endpoint-pääte.
 
-Rajapintafunktioita käytetään alla olevan taulukon mukaisesti:
+Rajapintapyynnöt toteutetaan alla olevan taulukon mukaisesti:
 
 
 | Toiminto (CRUD)                            | HTTP-metodi | Endpointin pääte     | JSON body                               | Token vaaditaan Authorization headeriin  |
