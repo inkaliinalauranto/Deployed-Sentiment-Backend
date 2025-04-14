@@ -1,6 +1,6 @@
 from typing import Type
-
 from flask import jsonify, request
+
 from decorators.get_db_conn import get_db_conn
 from decorators.init_service import init_service
 from decorators.init_token_methods import init_token_methods
@@ -15,7 +15,7 @@ USER_SERVICE = "user"
 
 @get_db_conn
 @init_service(USER_SERVICE)
-def get_users(service: UserServiceBase):
+async def get_users(service: UserServiceBase):
     try:
         require_user(request)
 
@@ -25,7 +25,7 @@ def get_users(service: UserServiceBase):
         return jsonify({"Error": str(e)})
 
 
-def get_logged_in_user():
+async def get_logged_in_user():
     try:
         user: User = require_user(request, True)
         return jsonify((UserResDto.model_validate(user)).dict())
@@ -35,7 +35,7 @@ def get_logged_in_user():
 
 @get_db_conn
 @init_service(USER_SERVICE)
-def register(service: UserServiceBase):
+async def register(service: UserServiceBase):
     try:
         if not request.json.get("username") or not request.json.get("password"):
             return jsonify({"Error": "Invalid request body"}), 400
@@ -53,14 +53,14 @@ def register(service: UserServiceBase):
 @get_db_conn
 @init_service(USER_SERVICE)
 @init_token_methods
-def login(service: UserServiceBase, token_methods: TokenMethodsBase):
+async def login(service: UserServiceBase, token_methods: TokenMethodsBase):
     try:
         if not request.json.get("username") or not request.json.get("password"):
             return jsonify({"Error": "Invalid request body"}), 400
 
         parsed_input_data: UserReqDto = UserReqDto.parse_raw(request.data)
 
-        token_string = service.login(req=parsed_input_data, token=token_methods)
+        token_string = service.login(req=parsed_input_data, token_methods=token_methods)
         return jsonify({"token": token_string})
 
     except Exception as e:
@@ -69,7 +69,7 @@ def login(service: UserServiceBase, token_methods: TokenMethodsBase):
 
 @get_db_conn
 @init_service(USER_SERVICE)
-def change_password_for_logged_in_user(service: UserServiceBase):
+async def change_password_for_logged_in_user(service: UserServiceBase):
     try:
         logged_in_user: User = require_user(request, True)
 
@@ -88,7 +88,7 @@ def change_password_for_logged_in_user(service: UserServiceBase):
 
 @get_db_conn
 @init_service(USER_SERVICE)
-def remove_logged_in_user(service: UserServiceBase):
+async def remove_logged_in_user(service: UserServiceBase):
     try:
         user: User = require_user(request, True)
         service.delete(user)

@@ -1,6 +1,5 @@
 from functools import wraps
-
-from flask import jsonify
+from flask import jsonify, current_app
 
 from services.service_factory import init_user_service
 from services.user_service_base import UserServiceBase
@@ -15,7 +14,7 @@ def init_service(name):
                 if name == "user":
                     service: UserServiceBase = init_user_service(conn)
 
-                return decorated_function(service, *args, **kwargs)
+                return current_app.ensure_sync(decorated_function)(service, *args, **kwargs)
             except Exception as e:
                 return jsonify({"Error": str(e)})
 
